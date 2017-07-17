@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Part 1: Intro to Databases - Girl Develop It</title>
+
+    <meta name="description" content="Girl Develop It framework for easily creating beautiful presentations using HTML in GDI theme. Forked from Hakim El Hattab's reveal.js">
+    <meta name="author" content="Girl Develop It">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="stylesheet" href="dist/css/reveal.css">
+    <link rel="stylesheet" href="dist/css/default.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <!-- light editor --> <link rel="stylesheet" href="dist/css/light.css">
+    <!-- dark editor <link rel="stylesheet" href="lib/css/dark.css">-->
+    <!-- <link rel="stylesheet" href="lib/css/zenburn.css">-->
+
+    <link rel="stylesheet" href="plugin/accessibility-helper/css/accessibility-helper.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'dist/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+
+    <!-- If use the PDF print sheet so students can print slides-->
+
+    <link rel="stylesheet" href="dist/css/print/pdf.css" type="text/css" media="print">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <!--[if lt IE 9]>
+    <script src="dist/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <section>
+          <h2><a href="index.html">Intro to Database Design</a></h2>
+          <img src="dist/img/circle-gdi-logo.png" alt="GDI Logo" class="noborder" style="max-height:400px;">
+          <h2>Part 1</h2>
+          <aside class="notes"> Introduce myself here </aside>
+        </section>
+
+        <section>
+          <h3>Welcome!</h3>
+          <div class = "left-align">
+          <p><b>Girl Develop It</b> is here to provide affordable and accessible programs to learn software through mentorship and hands-on instruction.</p><br>
+          <h4>Some "rules"</h4>
+          <ul>
+            <li>We are here for you!</li>
+            <li>Every question is important.</li>
+            <li>Help each other.</li>
+            <li>Have fun.</li>
+          </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2>Welcome!</h2>
+            <div class = "left-align">
+              <h4>Tell us about yourself.</h4>
+              <ul>
+                <li>What's your name?</li>
+                <!-- Feel free to change the icebreaker question! -->
+                <li>What's your favorite thing you've ever made?</li>
+              </ul>
+            </div>
+        </section>
+
+        <!-- What is JavaScript-->
+        <section>
+          <h3>What is a database?</h3>
+          <img alt="A cat with its paw raised" src="dist\img\QuestioningCat.jpg" />
+          <p>A set of related data and the way it is organized!</p>
+          <small class="credit">Photo credit: Buzzfeed</small>
+        </section>
+
+        <section>
+          <h3>What is a database?</h3>
+          <p>A collection of tables, schemas, queries, reports, views, and other objects (it’s not just tables of data!) often organized in a way that supports
+            processes or reflects real life in order to facilitate business or functions.</p>
+            <img alt="Overwhelmed cat" src="dist\img\WUTCat.jpg" />
+        </section>
+
+        <section>
+          <h3>What is a database - what are those things?!</h3>
+          <p>
+            <em>A collection of tables, schemas, queries, views…</em>
+            <ul>
+              <li><b>Table</b> = collection of related data arranged in columns and rows.</li>
+              <li><b>Schema</b> = logical grouping of objects (tables, etc.), often in a functional way.</li>
+              <li><b>Query</b> = request for information from a database.</li>
+              <li><b>View</b> = result of a stored query.</li>
+              <aside class="notes">So for 1 database you may have an HR schema and a sales schema. A view looks like a table, but a view’s data is calculated
+              in real-time. Also provide pretty significant advantages to a
+              table - can restrict access to just views (can be a subset of data), can simplify or aggregate data, take very little space to
+              store since a database stores just the definition of the view, not a copy of all the data it has.</aside>
+            </ul>
+          </p>
+        </section>
+
+        <section>
+          <h3>Levels of the Database</h3>
+          <img alt="Levels of the database" src="dist\img\LevelsOfDBMS.png" />
+          <br /><br />
+          <small class="credit">Photo credit: W3 Schools</small>
+          <aside class="notes">
+            External level = How each group of end-users sees the organization of data in the database. Can be any number.
+            Conceptual/logical level = Unifies all of the external views. Fields, relationships, etc. This is the level you would use to write code against. Only 1.
+            Internal level = Internal organization of data in a DBMS. Can get complex data structure info, blocks and bytes, etc. Only 1.
+          </aside>
+        </section>
+
+        <section>
+          <h3>Data Independence</h3>
+          <p>Changes made at one level do not affect any other level.</p>
+          <aside class="notes">
+            So, for example, an end user can change their external view and it doesn’t affect a database application developer’s code at the conceptual level!
+            So you can make physical changes to the database, for optimization for example, without changing the application.
+            If we add some new columns or remove some columns from a table then the user view and programs should not change.
+          </aside>
+          <p>Independence hides the details of the storage structure from user applications.</p>
+          <br />
+          <ul>
+            <li><b>Physical independence</b> = ability to modify the physical schema without causing application programs to be rewritten. </li>
+            <li><b>Logical independence</b> = ability to modify the logical schema without causing application programs to be rewritten.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2><a href="index.html">Questions?</a></h2>
+          <aside class="notes">Moving on to learning how we would work with a database in real life</aside>
+        </section>
+
+    </div>
+    <footer>
+      <div class="copyright">
+        Intro to Database Design &mdash; Girl Develop It &mdash;
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png" /></a>
+      </div>
+    </footer>
+  </div>
+
+    <script src="dist/js/head.min.js"></script>
+    <script src="dist/js/reveal.min.js"></script>
+
+    <script>
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true },
+                    { src: 'plugin/accessibility-helper/js/accessibility-helper.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+    </script>
+
+  </body>
+</html>

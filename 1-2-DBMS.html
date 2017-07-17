@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Part 1: Intro to Databases - Girl Develop It</title>
+
+    <meta name="description" content="Girl Develop It framework for easily creating beautiful presentations using HTML in GDI theme. Forked from Hakim El Hattab's reveal.js">
+    <meta name="author" content="Girl Develop It">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="stylesheet" href="dist/css/reveal.css">
+    <link rel="stylesheet" href="dist/css/default.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <!-- light editor --> <link rel="stylesheet" href="dist/css/light.css">
+    <!-- dark editor <link rel="stylesheet" href="lib/css/dark.css">-->
+    <!-- <link rel="stylesheet" href="lib/css/zenburn.css">-->
+
+    <link rel="stylesheet" href="plugin/accessibility-helper/css/accessibility-helper.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'dist/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+
+    <!-- If use the PDF print sheet so students can print slides-->
+
+    <link rel="stylesheet" href="dist/css/print/pdf.css" type="text/css" media="print">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <!--[if lt IE 9]>
+    <script src="dist/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <section>
+          <h3>How do I work with a database?</h3>
+          <p>Use a database management system - a DBMS!</p>
+          <img alt="Database connected to a DBMS connected to a group of cats" src="dist\img\DBMSCats.JPG" />
+        </section>
+
+        <section>
+          <h3>A DBMS...</h3>
+          <ul>
+            <li>Connects the data, the user, and other applications.</li>
+            <li>Can define the database!</li>
+            <li>Can create the database!</li>
+            <li>Queries the data!</li>
+            <li>Updates the data!</li>
+            <li>Administrates the database!</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>DBMS options</h3>
+          <ul>
+            <li>Microsoft SQL Server</li>
+            <li>Oracle</li>
+            <li>IBM’s DB2</li>
+            <li>PostgreSQL</li>
+            <li>MySQL</li>
+            <li>Microsoft Access</li>
+          </ul>
+          <aside class="notes">Access is not generally considered an industrial-strength, "professional" DBMS, but it definitely has its strengths.
+          For one, it is part of Microsoft Office, so it has a UI we can all use intuitively. You may not see Access at somewhere
+          like Sparkbox or a big enterprise, but a lot of small places, somewhere like a small business or a school at a university,
+          would have good reason to use Access.
+
+          By the way -you’re going to see the three letters “SQL” quite a bit in this class. How is it pronounced?
+          SQL was originally called SEQUAL, but of course now it’s obviously spelled SQL, but seuql is easier to say.
+          It’s a whole thing that shouldn’t be a thing, I recommend using whatever your boss uses and then you’ll be safe. </aside>
+        </section>
+
+        <section>
+          <h3>What does a DBMS do for me?</h3>
+          <ul>
+            <li>Storage</li>
+            <li>Data integrity</li>
+            <li>Data consistency</li>
+            <li>Performance</li>
+            <li>Security</li>
+            <li>Backup and recovery</li>
+            <li>And some other stuff...</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Storage</h3>
+          <p>The internal level of the database architecture + metadata and data structures.</p>
+          <aside class="notes">
+            internal = bits and bytes, actual storage
+            includes schemas, tables, queries, views, etc.
+            More than just data - serious optimization happens at the storage/internal level of the database so that the database is fast and efficient when data is requested.
+            DBMS allows access to the engine through the UI or possibly through an API so that humans can hit it.
+            Availability = more people can access the same piece of data with good performance
+            Resiliency = data is backed up in case of a failure
+          </aside>
+          <br />
+          <ul>
+            <li><b>Database engine</b> = underlying software a DBMS uses to manipulate the data.</li>
+            <li><b>Database replication</b> = replicating data in order to increase availability and resiliency.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Data Integrity</h3>
+          <p>Ensuring valid data.</p>
+          <ul>
+            <li><b>Data types</b> ensure that, for example, date fields only store date values.</li>
+            <aside class="notes">
+              So just like we can give a variable a datatype in programming and only values of that datatype are allowed ot be saved there,
+            we can give a field in a database a type and the DBMS will control that.
+            </aside>
+
+          </ul>
+        </section>
+
+        <section>
+          <h3>Data Integrity</h3>
+          <p>Ensuring valid data.</p>
+            <ul>
+              <li><b>Constraint</b> = limit the type of data that can go in a table, ensuring accuracy and reliability.
+                <ul>
+                  <li>Can be column-level or table-level.</li>
+                  <li>Not Null, Unique, Default</li>
+                </ul>
+              </li>
+              <li><b>Trigger</b> = action (code) that is run automatically in response to a certain event.</li>
+            </ul>
+          </li>
+          <aside class="notes">
+          Examples of triggers: every time a new employee is added, create entries for that person in the tax and benefits table.
+            Or before a customer is deleted, confirm they do not have an outstanding order, and prevent the deletion if so.
+          </aside>
+        </section>
+
+        <section>
+          <h3>Data Consistency</h3>
+          <p>Ensuring the database is in a valid state.</p>
+          <ul>
+            <li><b>Record locking</b> = preventing simultaneous access to data.</li>
+            <li>Record locks prevent “dirty” reads or writes.</li>
+          </ul>
+          <img alt="A cat cleaning the screen of a computer" src="dist\img\CatCleaning.jpg" />
+          <aside class="notes">Imagine you have a word document on Dropbox - go on with example. In databases, an example would be 2 bank clerks trying to modify 1
+            bank account. The 1st clerk makes a quick update and saves it.
+            Then the 2nd clerk makes their update and saves it, effectively erasing the first transaction entirely. The solution is to lock the record after the first
+            person retrieves the data, then unlock it once that change is saved.</aside>
+        </section>
+
+        <section>
+          <h3>Data Consistency</h3>
+          <p>Ensuring the database is in a valid state.</p>
+          <ul>
+            <li><b>Commit and rollback</b> mechanisms ensure transactions are either fully completed or fully rolled back.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Performance</h3>
+          <p>Fine-grained record locking prevents queries from blocking others.</p>
+          <ul>
+            <li>Indexes speed up lookups and joins by magnitudes.
+              <aside class="notes">Index = data structure that improves the speed of data retrieval at the cost of additional writes and storage space to maintain the
+                index data structure.</aside>
+            </li>
+            <li>Query optimizers find the fastest way to execute your query.</li>
+              <ul>
+                <li><b>Query optimizer</b> = determine the most efficient way to execute a given query internally.</li>
+              </ul>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Security</h3>
+          <p>People or code may be restricted in what database objects they can control or which computations they can make</p>
+          <ul>
+            <li><b>Multi-tiered security</b> allows restrictions at the server level, database level, column level, role level, and user level.</li>
+            <li>Change and access logs - what was changed, when it was changed, and by whom it was changed.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Backup and Recovery</h3>
+          <p>Use tools for backup and recovery! Log files make it possible.</p>
+          <ul>
+            <li><b>Database mirroring</b> = creation and maintenance of redundant copies of a database. Ensures continuous availability.</li>
+            <li><b>Failover clustering</b> = creation and maintenance of groups of servers that work in the same way to ensure high availability of data.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>And some other DBMS features...</h3>
+          <ul>
+            <li><b>Materialized view</b> = saved result of a frequently needed query.</li>
+            <aside class="notes">Materialized view = view but data is saved and only updated periodically. So can be older data, but is available instantly.</aside>
+            <li><b>Migration</b> = moving a database from one DBMS to another. Typically a DBMS will include import tools.</li>
+            <li>Graphics component for producing graphs and charts</li>
+            <li>Tools for design, programming, maintenance, performance analysis, configuration, etc.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Transaction</h3>
+          <p>1 unit of work performed within a DBMS against a database. </p>
+          <ol>
+            <li>They provide reliable units of work to allow a recovery from a failure.</li>
+            <li>They provide isolation between programs hitting a database at the same time.</li>
+          </ol>
+          <p>Transactions are <b>ACID</b>!
+          <aside class="notes">Transactions can be used to increase a lot of the elements of a database we've already talked about - security, data integrity, data consistency, etc..</aside>
+        </section>
+
+        <section>
+          <h3><b>A</b>CID</h3>
+          <p>Atomicity = a transaction must be all or nothing. If one part of a transaction fails, it all fails and the database is left unchanged.</p>
+          <aside class="notes">Just want to touch on all of these definitions, then we'll learn them much better with simple examples.</aside>
+        </section>
+
+        <section>
+          <h3>A<b>C</b>ID</h3>
+          <p>Consistency = any transaction will bring the database from one valid state to another; invalid data causes transactions to roll back. Any data must align with all constraints and triggers.</p>
+        </section>
+
+        <section>
+          <h3>AC<b>I</b>D</h3>
+          <p>Isolation = concurrent transactions result in the same state as sequential transactions; all transactions are independent! </p>
+        </section>
+
+        <section>
+          <h3>ACI<b>D</b></h3>
+          <p>Durability = once a transaction is complete, it is permanent - even if the system fails (power loss, crash, etc.).</p>
+          <img alt="A cat in armor" src="dist\img\DurableCat.jpg" />
+        </section>
+
+        <section>
+          <h3>ACID</h3>
+          <p>Imagine moving $100 from your checking account to your savings account.</p>
+          <ol>
+            <li>Confirm the accounts are valid.</li>
+            <li>Confirm the checking account has available funds.</li>
+            <li>Debit the checking account $100.</li>
+            <li>Credit the savings account $100.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h3>ACID - Atomicity</h3>
+          <p>Case 1: The building loses power between debiting checkings and crediting savings.</p>
+          <p>Because the transaction was not fully committed, <b>atomicity</b> ensures that the transaction is rolled back. </p>
+          <p>(This is <b>commit and rollback</b>!)</p>
+          <aside class="notes">Remember atomicity says that a transaction must be all or nothing. If one part of a transaction fails, it all fails and the database is left unchanged.</aside>
+        </section>
+
+        <section>
+          <h3>ACID - Consistency</h3>
+          <p>Case 2: Memory corruption causes a credit savings by $1,000,000 instead of $100.</p>
+          <p>Because the transaction leaves the system in an inconsistent state, <b>consistency</b> will ensure that the transaction is rolled back (sorry!).</p>
+          <aside class="notes">Remember consistency is that any transaction will bring the database from one valid state to another; invalid data causes transactions to roll back.</aside>
+        </section>
+
+        <section>
+          <h3>ACID - Isolation</h3>
+          <p>Case 3: At the same time that you transfer funds, your utility cashes a check that brings your checking balance to $50.</p>
+          <p><b>Isolation</b> ensures that either the utility clears before your transaction (meaning your transaction will be rejected) or your transaction finishes first (meaning the utility check will bounce).</p>
+          <p>(This is <b>record locking</b>!)</p>
+          <aside class="notes">Remember isolation means all transactions are independent.</aside>
+        </section>
+
+        <section>
+          <h3>ACID - Durability</h3>
+          <p>Case 4: The building loses power right after your transaction completes.</p>
+          <p><b>Durability</b> ensures that the transaction is permanent.</p>
+          <aside class="notes">Remember durability means once a transaction is complete, it is permanent.</aside>
+        </section>
+
+        <section>
+          <h3>"The database"</h3>
+          <img alt="A surprised looking cat in a suit and tie" src="dist\img\FormalCat.JPG" />
+        </section>
+
+        <section>
+          <h2><a href="index.html">Questions?</a></h2>
+          <aside class="notes">Before we talk a little bit about code...</aside>
+        </section>
+
+    </div>
+    <footer>
+      <div class="copyright">
+        Intro to Database Design &mdash; Girl Develop It &mdash;
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png" /></a>
+      </div>
+    </footer>
+  </div>
+
+    <script src="dist/js/head.min.js"></script>
+    <script src="dist/js/reveal.min.js"></script>
+
+    <script>
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true },
+                    { src: 'plugin/accessibility-helper/js/accessibility-helper.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+    </script>
+
+  </body>
+</html>

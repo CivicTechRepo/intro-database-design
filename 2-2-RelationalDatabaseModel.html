@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Part 2: Intro to Databases Design - Girl Develop It</title>
+
+    <meta name="description" content="Girl Develop It framework for easily creating beautiful presentations using HTML in GDI theme. Forked from Hakim El Hattab's reveal.js">
+    <meta name="author" content="Girl Develop It">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="stylesheet" href="dist/css/reveal.css">
+    <link rel="stylesheet" href="dist/css/default.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <!-- light editor --> <link rel="stylesheet" href="dist/css/light.css">
+    <!-- dark editor <link rel="stylesheet" href="lib/css/dark.css">-->
+    <!-- <link rel="stylesheet" href="lib/css/zenburn.css">-->
+
+    <link rel="stylesheet" href="plugin/accessibility-helper/css/accessibility-helper.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'dist/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+
+    <!-- If use the PDF print sheet so students can print slides-->
+
+    <link rel="stylesheet" href="dist/css/print/pdf.css" type="text/css" media="print">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <!--[if lt IE 9]>
+    <script src="dist/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <section>
+          <h3>Popularity winner</h3>
+          <p><b>Relational database</b> = organizes data into one or more tables of columns and rows with a unique key identifying each row (record).</p>
+          <img alt="Image of an ER model" src="dist/img/Relational_database.svg.png" />
+          <p>
+            <small class="credit">
+              Photo credit: Wikimedia
+            </small>
+          </p>
+        </section>
+
+        <section>
+          <h3>Pet Tracker DB</h3>
+          <p><b>Relation</b> = data points related to each other are stored in a table.</p>
+          <p><b>Relation</b> = tables are related to each other.</p>
+          <img alt="Example of relations in a database" src="dist/img/RelationExample.JPG" />
+        </section>
+
+        <section>
+          <h3>Relational Databases - Why?</h3>
+          <ul>
+            <li>ACID makes it reliable for critical transactional systems.</li>
+            <li>Acts as an all-purpose database.
+              <ul>
+                <li>Older models did not perform well; they encouraged redundant and inaccurate data.</li>
+                <li>Newer models are more specialty - solve a problem in one area but come at a high cost in other areas.</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Relational Databases - Why?</h3>
+          <ul>
+            <li>A set of rules called the <b>normal forms</b> ensures data redundancy is reduced and data integrity is upheld.</li>
+            <li>The process of applying the normal forms is called <b>normalization</b>.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Pet Tracker DB - now in flat form!</h3>
+          <img alt="PetDB in flat form" src="dist/img/PetDBFlatForm.JPG" />
+        </section>
+
+        <section>
+          <h3>Flat Pet Tracker DB</h3>
+          <p>After a couple of additions...</p>
+          <img alt="PetDB in flat form, with mistakes" src="dist/img/FlatFormMistakes.JPG" />
+        </section>
+
+        <section>
+          <h3>Decomposition</h3>
+          <p>= the process of splitting data into tables.</p>
+          <img alt="A decomposition plan for Pet DB" src="dist/img/DecompositionPlan.JPG" />
+        </section>
+
+        <section>
+          <h3>Decomposition - back to the normal forms</h3>
+          <p>If we follow the normal forms when decomposing, then we are guaranteed we will be able to reconstruct the data.</p>
+        </section>
+
+        <section>
+          <h3>Decomposition - First Normal Form</h3>
+          <ul>
+            <li>Eliminate repeating groups in individual tables.</li>
+            <li>Create a separate table for each set of related data.</li>
+            <li>Identify each set of related data with a primary key.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Decomposition - Second Normal Form</h3>
+          <ul>
+            <li>1NF.</li>
+            <li>Every non-prime attribute of the relation is dependent on the whole of every candidate key.</li>
+          </ul>
+          <aside class="notes">Said more simply, all non-key columns are dependent on the table's primary key.</aside>
+        </section>
+
+        <section>
+          <h3>Decomposition - Third Normal Form</h3>
+          <ul>
+            <li>2NF.</li>
+            <li>All the attributes in a table are determined only by the candidate keys of that relation and not by any non-prime attributes.</li>
+          </ul>
+          <aside class="notes">Third normal form = none of the values can be extrapolated from or rely on a secondary field.
+              So imagine a table with three columns - name, birthday, and age. Well age can be easily extrapolated from birthday. If we update the birthday and
+              not the age, we’d have conflicting data. This is a super simple example of a table which does not meet the criteria for third normal form.</aside>
+        </section>
+
+        <section>
+          <h3>Successfully decomposed and normalized!</h3>
+          <img alt="A decomposed Pet DB" src="dist/img/DecomposedPetDB.JPG" />
+        </section>
+
+        <section>
+          <h3>Joins</h3>
+          <p>We put the data back together by <b>joining</b> tables</p>
+          <img alt="A plan to join two tables of the Pet DB" src="dist/img/JoinPlan.JPG" />
+        </section>
+
+        <section>
+          <h3>Joins</h3>
+          <p>Every row in the pet table is matched to a row in the owner table.</p>
+          <img alt="Two tables ready to join" src="dist/img/ReadyToJoin.JPG" />
+          <p>What is Pets &#10781 Owners on Pet Name = Owner First?</p>
+          <aside class="notes">Explain how to find the join of pets and owners on Pet Name = Owner First.
+            First Find every Owner where Owner First = Robigo, then Owner First = Tabytha, etc.</aside>
+        </section>
+
+        <section>
+          <h3>Joins</h3>
+          <p>The result: Pets &#10781 Owners on Pet Name = Owner First</p>
+          <img alt="An empty table" src="dist/img/EmptyJoinedTable.JPG" />
+          <aside class="notes">Nothing! Nothing is actually relating these two tables yet!</aside>
+        </section>
+
+        <section>
+          <h3>Joins</h3>
+          <p>During decomposition, we always copy a certain field to each table to serve as the relationship.</p>
+          <img alt="Owner First column added to Pets table" src="dist/img/ConnectingField.JPG" />
+          <p>What is Pets &#10781 Owners on Owner First = Owner First?</p>
+          <aside class="notes">We can’t just match on pet name and owner name. We have to deliberately build our tables
+            so that we have a field to match on. We have to be intentional with our relationships.</aside>
+        </section>
+
+        <section>
+          <h3>Primary Key</h3>
+          <p>What is Pets &#10781 Owners on Owner First = Owner First?</p>
+          <img alt="Pets and Owners joined on Owner First" src="dist/img/JoinedOnOwnerFirst.JPG" />
+        </section>
+
+        <section>
+          <h3>Primary Key</h3>
+          <ul>
+            <li>A field (or set of fields) that uniquely identify rows.</li>
+            <li>The minimal set of fields upon which the row is <b>functionally dependent</b>.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Primary Key - Functional Dependency</h3>
+          <p>Let A and B be sets of fields in a table.</p>
+          <p>A functional dependency exists (A → B) if for every field[A] in the table we get back row[B].</p>
+          <aside class="notes">Suppose one is designing a system to track vehicles and the capacity of their engines. Each vehicle has a unique vehicle
+            identification number (VIN). One would write VIN → EngineCapacity because it would be inappropriate for a vehicle's engine to have more than one capacity.
+            (Assuming, in this case, that vehicles only have one engine.) Transversely, EngineCapacity → VIN is incorrect because there could be many vehicles with the
+            same engine capacity.</aside>
+        </section>
+
+        <section>
+          <h3>Functional Dependency</h3>
+          <img alt="A small functionally dependent example" src="dist/img/FunctionalDependency1.JPG" />
+          <p>Let A = (Owner First), B = (Owner Last). Can we say A → B?</p>
+          <aside class="notes">Yes, in this small dataset. In this case, B → A as well. But, if you imagine that this were John Doe instead of John Smith, the dataset would
+            still have A → B but would no longer have B → A.</aside>
+        </section>
+
+        <section>
+          <h3>Functional Dependency</h3>
+          <img alt="A small functionally independent example" src="dist/img/FunctionalDependency2.JPG" />
+          <p>Let A = (Owner First), B = (Owner Last). Can we say A → B?</p>
+          <aside class="notes">No.</aside>
+        </section>
+
+        <section>
+          <h3>Functional Dependency</h3>
+          <img alt="Pet DB functional dependency" src="dist/img/PetDBFunctionalDependency.JPG" />
+          <p>Let A = (Owner First, Pet Name), B = (rest of pet facts). Can we say A → B?</p>
+          <aside class="notes">Yes, so we can use the combination of owner first and pet name to look up all of the pet facts.</aside>
+        </section>
+
+        <section>
+          <h3>Primary Key Candidate</h3>
+          <img alt="Pet DB functional dependency" src="dist/img/PetDBFunctionalDependency.JPG" />
+          <p>Every time I see a particular Owner First + Pet Name, I expect to get back the same Pet Birthday, Pet Color, and Pet Skill.</p>
+          <aside class="notes">The same person having two identical pets, including name, is not a valid business case in this situation.</aside>
+        </section>
+
+        <section>
+          <h3>Primary Key</h3>
+          <ul>
+            <li>The PK must be unique within the table.</li>
+            <li>Only one PK is allowed per table.</li>
+            <li>The PK is automatically indexed (for fast lookup!).</li>
+          </ul>
+          <aside class="notes">So you may set something like an SSN or an Order Number may make a good key. HOWEVER (and this is where we return to the Pet DB)</aside>
+        </section>
+
+        <section>
+          <h3>Primary Key Candidate</h3>
+          <img alt="Names not working for PK" src="dist/img/NamesNotGoodKeys.JPG" />
+          <p>PKs must be unique within the table - for this reason, names make poor PKs.</p>
+          <aside class="notes">It’s easy to see how a in a table like this, it may be tough or impossible to find a key.</aside>
+        </section>
+
+        <section>
+          <h3>Primary Key Candidate</h3>
+          <img alt="ID field added to Owner table" src="dist/img/AddingIDField.JPG" />
+          <p>For this reason, you’ll usually see a unique ID field used as a PK.</p>
+        </section>
+
+        <section>
+          <h3>Primary Key</h3>
+          <p>Primary keys are often “ID” fields in all tables.</p>
+          <ul>
+            <li>This is partly done for convenience
+              <ul><li>ID fields are often autoincrement fields</li></ul>
+            </li>
+            <li>Remember PKs are automatically indexed, and numbers are faster to increment.</li>
+            <li>Other tables may refer back to another table’s PK, and it’s easier and faster to bring in one column instead of multiple.</li>
+          </ul>
+          <aside class="notes">Also - having only one column as the PK is significantly faster than having two like we had in the Pets table.</aside>
+        </section>
+
+        <section>
+          <h3>Primary Key</h3>
+          <img alt="ID field added to pets table" src="dist/img/PKAddedToPets.JPG" />
+          <aside class="notes">We already added our PK to the owner table - here it is added to the Pets table. Now, instead of Owner First + Pet Name
+            being the only way to identify records, we have a column we know will always be unique.</aside>
+        </section>
+
+        <section>
+          <h3>Foreign Key</h3>
+          <p>= a field (or set of fields) that is a PK in some other table.</p>
+          <ul>
+            <li>There can be multiple FKs in a table</li>
+            <li>FKs are how you designate that tables are related.</li>
+          </ul>
+          <aside class="notes">So you remember about 60 slides ago when we were joining Pets and Owners on Owner first? And I said remember
+            this spot because we're going to come back to it after we learn about keys?</aside>
+        </section>
+
+        <section>
+          <h3>Foreign Key</h3>
+          <img alt="Tables not yet formally connected" src="dist/img/DisconnectedTables.JPG" />
+          <p>These tables are not yet formally connected in any way!</p>
+          <aside class="notes">These tables are connected on Owner First, but we know Owner First could very easily be duplicated in
+            the Owners table, so it isn’t unique in any way. Also, since it’s not a key in Owners, it’s not a Foreign Key.</aside>
+        </section>
+
+        <section>
+          <h3>Foreign Key</h3>
+          <img alt="Tables connected by a FK" src="dist/img/AddFKToPets.JPG" />
+          <p>These tables are now related!</p>
+          <aside class="notes">If we replace Owner First with Owner_Id, we’ve created a link between the two tables which is indisputable. It’s a foreign key!</aside>
+        </section>
+
+        <section>
+          <h3>Referential Integrity</h3>
+          <p>A database has <b>referential integrity</b> if rules are in place that ensure that a FK can never point to a row that doesn’t exist.</p>
+        </section>
+
+        <section>
+          <h3>Foreign Key</h3>
+          <img alt="Row is deleted, so we now have orphan rows" src="dist/img/OrphanRows.JPG" />
+          <p>Pet_IDs 3 and 5 have become orphan rows :(</p>
+          <aside class="notes">If something happens to the second owner, what will happen to the 3rd and 4th pets? There are two ways to deal with the illegal
+            action of deleting the second owner.</aside>
+        </section>
+
+        <section>
+          <h3>Referential Constraints</h3>
+          <p><b>Cascade</b> = cascade changes in PK to all referencing FKs.</p>
+          <br /><br />
+          <p><b>Restrict</b> (or <b>no action</b>) = don’t allow changes to PK if there is a referencing FK.</p>
+          <aside class="notes">So if we set our preferences to cascade deletions, when we deleted the second owner we would also delete the third and fifth pets.
+            If we set our preferences to restrict deletions, when we attempt to delete the second owner we would get an error.
+            This doesn’t just apply to deletions - the same would happen, depending on our chosen constraint, if we for example changed the value of the PK.
+            So if we chose cascade and then changed the second Owner’s PK to 3, that change would cascade through the Pet table and change the third and fifth pet’s
+            owner FK to 3.
+          </aside>
+        </section>
+
+        <section>
+          <h3>Our original flat file...</p>
+          <img alt="Our three tables" src="dist/img/DecomposedPetDB.JPG" />
+        </section>
+
+        <section>
+          <img alt="Three tables, with two of them improved" src="dist/img/ImprovedTwoTables.JPG" />
+        </section>
+
+        <section>
+          <img alt="Households now has an ID column" src="dist/img/IDAddedToHouseholds.JPG" />
+        </section>
+
+        <section>
+          <img alt="Owners now has a FK to households" src="dist/img/HHIDAddedToHouseholds.JPG" />
+        </section>
+
+        <section>
+          <img alt="Flat form with mistakes" src="dist/img/FlatFormMistakes.JPG" />
+        </section>
+
+        <section>
+          <img alt="Improved database with arrows connecting tables" src="dist/img/PetDBImprovedWithArrows.JPG" />
+        </section>
+
+        <section>
+          <h3>Indexes</h3>
+          <p>= a special data structure that speeds up data retrieval.</p>
+          <img alt="A cat reading a newspaper" src="dist\img\ReadingCat.jpg" />
+          <p>Consider the task of trying to find all references to an “Anna” character in War and Peace.</p>
+          <aside class="notes">You may remember that we learned that PKs are automatically indexed, and then didn’t really talk about what an index is.
+            If all we have is the novel, we basically just have to read or scan the entire massive novel. However, if the novel had an index, we can look
+            Anna up in the index and then go directly to the pages she’s on. An index on a field in a database works in a similar way, using a special data structure
+            called a b-tree.
+            Back to PKs being automatically indexed - when keys are indexed it makes joining two or more tables vastly faster.
+          </aside>
+        </section>
+
+        <section>
+          <h3>Indexes</h3>
+          <ul>
+            <li>Indexes slow down writes</li>
+            <li>Too many indexes can slow down queries</li>
+          </ul>
+          <p>So it’s a tradeoff! </p>
+          <aside class="notes">So why don’t we just index every field, since they vastly improve performance?</aside>
+        </section>
+
+        <section>
+          <h3>Indexes</h3>
+          <p>What fields should be indexed?</p>
+          <ul>
+            <li>PKs are automatically indexed.</li>
+            <li>FKs, especially if you enforce referential integrity</li>
+            <li>Fields which will be queried over and over
+              <ul>
+                <li>Name fields</li>
+                <li>Phone number, if your system looks people up by phone</li>
+                <li>State, if producing mass mailings by state</li>
+              </ul>
+            </li>
+          </ul>
+          <aside class="notes">Remember referential integrity means that rules are in place that ensure that a FK can never point to a row that doesn’t exist.
+            So really beyond the keys, it’s up to you or your business rules to determine which fields should be indexed.</aside>
+        </section>
+
+        <section>
+          <img alt="A cat with a very excited expression" src="dist\img\ExcitedCat.jpg" />
+          <h2>Okay, I know about 500 vocab words...now how do I start??</h2>
+        </section>
+
+        <section>
+          <h3>Designing a Database</h3>
+          <p>1. Produce a conceptual data model</p>
+          <ul>
+            <li>Reflects the possible state of the external system being modeled.
+              <ul>
+                <li>Can a person have more than 1 phone number?</li>
+                <li>Can a customer also be a supplier?</li>
+              </ul>
+            </li>
+            <li>Establish definitions of the terminology used for entities (customers, products, cats) and their relationships and attributes.</li>
+          </ul>
+          <aside class="notes">Entity-relationship model = captures relationships, but isn’t directly tied to the physical structure of the database.</aside>
+        </section>
+
+        <section>
+          <h3>Designing a Database</h3>
+          <p>2. Translate the data model into a schema</p>
+          <ul>
+            <li>Often called logical database design; output is a logical data model.</li>
+            <li>The logical data model is specific to the chosen database model and DBMS - we’re getting real and technical, at this point.</li>
+          </ul>
+          <aside class="notes">Getting a little more technical - basically choose your database model and your DBMS.</aside>
+        </section>
+
+        <section>
+          <h3>Designing a Database</h3>
+          <p>3. Design the physical database</p>
+          <ul>
+            <li>Make decisions that affect performance, scalability, recovery, security, etc.</li>
+          </ul>
+        </section>
+
+        <section>
+          <img alt="Then draw the rest of the owl meme" src="dist/img/DrawTheOwl.jpg" />
+          <aside class="notes">We've touched the very surface of the iceberg here today, but the very basics is all that's needed to create a very basic
+          database! If you sat down with Access or Microsoft SQL Server right now, or even just with a piece of paper, I know you could create a really great
+        small database; something like the students/teacher/class model we talked about a lot as an example.</aside>
+        </section>
+
+        <section>
+          <h2><a href="index.html">Questions?</a></h2>
+          <aside class="notes">We've now covered all of the technical content of the course, and I'd like to just go over a couple
+          additional items before we wrap up</aside>
+        </section>
+
+    </div>
+    <footer>
+      <div class="copyright">
+        Intro to Database Design &mdash; Girl Develop It &mdash;
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc/3.0/80x15.png" /></a>
+      </div>
+    </footer>
+  </div>
+
+    <script src="dist/js/head.min.js"></script>
+    <script src="dist/js/reveal.min.js"></script>
+
+    <script>
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true },
+                    { src: 'plugin/accessibility-helper/js/accessibility-helper.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+    </script>
+
+  </body>
+</html>
