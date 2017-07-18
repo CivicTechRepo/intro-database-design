@@ -1,6 +1,6 @@
 # Intro to Database Design
 
-Slides and materials are hosted at [http://girldevelopit.github.io/gdi-intro-database-design/](http://girldevelopit.github.io/gdi-intro-database-design).
+Slides and materials are hosted at [https://gdidayton.github.io/intro-database-design/](https://gdidayton.github.io/intro-database-design/).
 
 This is the Girl Develop It Intro to Databases course. Material was created by Annye Driscoll in the summer of 2017 and is based in part on older GDI classes.
 
